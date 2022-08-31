@@ -2,15 +2,18 @@ import React from "react";
 
 const RenderInput = ({ outputConsole }) => {
   const [input, setInput] = React.useState("");
+
   const outputValue = () => {
     if (input) {
-      outputConsole(input);
+      outputConsole();
     }
   };
+
   //console.log(outputConsole);
   const updateValue = (e) => {
     setInput(e.target.value);
   };
+
   return (
     <div>
       <input

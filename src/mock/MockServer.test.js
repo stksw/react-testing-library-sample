@@ -8,7 +8,7 @@ import MockServer from "./MockServer";
 
 const server = setupServer(
   rest.get("https://jsonplaceholder.typicode.com/users/1", (req, res, ctx) => {
-    return res(ctx.status(200), ctx.json({ username: "Bred dummy" }));
+    return res(ctx.status(200), ctx.json({ username: "dummy user" }));
   })
 );
 
@@ -19,23 +19,22 @@ afterEach(() => {
 afterAll(() => server.close());
 
 describe("Mocking API", () => {
-  it("[Fetch success]Should display fetched data correctly and button disable", async () => {
+  it("[Fetch success] Should display fetched data correctly and button disable", async () => {
     render(<MockServer />);
     await userEvent.click(screen.getByRole("button"));
-    expect(await screen.findByRole("heading")).toHaveTextContent("Bred dummy");
+    expect(await screen.findByRole("heading")).toHaveTextContent("dummy user");
     expect(screen.getByRole("button")).toHaveAttribute("disabled");
   });
-  it("[Fetch failure]Should display error msg, no render heading and button abled", async () => {
+
+  it("[Fetch failure] Should display error msg, no render heading and button abled", async () => {
     server.use(
-      rest.get(
-        "https://jsonplaceholder.typicode.com/users/1",
-        (req, res, ctx) => {
-          return res(ctx.status(404));
-        }
-      )
+      "https://jsonplaceholder.typicode.com/users/1",
+      (req, res, ctx) => {
+        return res(ctx.status(404));
+      }
     );
     render(<MockServer />);
-    await userEvent.click(screen.getByRole("button"));
+    userEvent.click(screen.getByRole("button"));
     expect(await screen.findByTestId("error")).toHaveTextContent(
       "Fetching Failed !"
     );

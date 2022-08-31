@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import RenderInput from "./RenderInput";
 
-describe("Rendering", () => {
+describe("Render Input", () => {
   it("Should render all the elements correctly", () => {
     render(<RenderInput />);
     expect(screen.getByRole("button")).toBeTruthy();
@@ -13,22 +13,21 @@ describe("Rendering", () => {
 
 describe("Input form onChange event", () => {
   it("Should update input value correctly", async () => {
-    //const user = userEvent.setup();
     render(<RenderInput />);
     const inputValue = screen.getByPlaceholderText("Enter");
-    //await user.type(inputValue, "test");
     await userEvent.type(inputValue, "test");
     expect(inputValue.value).toBe("test");
   });
 });
 
-describe("Console button conditionally triggered", () => {
+describe("Console button correctly triggered", () => {
   it("Should not trigger output function", async () => {
     const outputConsole = jest.fn();
     render(<RenderInput outputConsole={outputConsole} />);
     await userEvent.click(screen.getByRole("button"));
     expect(outputConsole).not.toHaveBeenCalled();
   });
+
   it("Should trigger output function", async () => {
     const outputConsole = jest.fn();
     render(<RenderInput outputConsole={outputConsole} />);

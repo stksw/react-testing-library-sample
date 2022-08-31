@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 const MockServer = () => {
-  const [clicked, setClicked] = React.useState(false);
-  const [username, setUsername] = React.useState("");
-  const [error, setError] = React.useState("");
+  const [clicked, setClicked] = useState(false);
+  const [username, setUsername] = useState("");
+  const [error, setError] = useState("");
 
   const fetchUser = async () => {
     axios

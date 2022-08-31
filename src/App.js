@@ -1,13 +1,12 @@
 import React from "react";
-import logo from "./logo.svg";
 import { Counter } from "./features/counter/Counter";
 import "./App.css";
-import RenderInput from "./RenderInput";
-import FrameworkList from "./FrameworkList";
-import MockServer from "./MockServer";
-import Redux from "./Redux";
-import ReduxAsync from "./ReduxAsync";
-import CustomHooks from "./CustomHooks";
+import RenderInput from "./components/RenderInput";
+import FrameworkList from "./components/FrameworkList";
+import MockServer from "./mock/MockServer";
+import Redux from "./rtk/Redux";
+import ReduxAsync from "./rtk/ReduxAsync";
+import CustomHooks from "./hooks/CustomHooks";
 import ClickRender from "./ClickRender";
 
 function App() {
@@ -26,12 +25,15 @@ function App() {
     },
   ];
 
+  const output = (text) => {
+    console.log(text);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <Counter />
-        <RenderInput outputConsole={console.log} />
+        <RenderInput outputConsole={output} />
         <FrameworkList frameworks={data} />
         {/* <FrameworkList /> */}
         <MockServer />

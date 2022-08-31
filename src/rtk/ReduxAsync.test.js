@@ -1,10 +1,9 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
-import customCounterReducer from "../src/features/customCounter/customCounterSlice";
+import customCounterReducer from "./customCounterSlice";
 import ReduxAsync from "./ReduxAsync";
 
 describe("ReduxAsync test", () => {
@@ -23,6 +22,7 @@ describe("ReduxAsync test", () => {
       </Provider>
     );
     await userEvent.click(screen.getByText("FetchDummy"));
+    // awaitで待つので、findByTestIdを使う
     expect(await screen.findByTestId("count-value")).toHaveTextContent("105");
   });
 });
